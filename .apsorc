@@ -1,0 +1,100 @@
+{
+  "entities": [
+    {
+      "name": "VoteQuestion",
+      "created_at": true,
+      "updated_at": true,
+      "fields": [
+        {
+          "name": "question_text",
+          "type": "text",
+          "nullable": false,
+          "isIndex": true,
+          "isUnique": false
+        }
+      ],
+      "indexes": [],
+      "uniques": []
+    },
+    {
+      "name": "VoteOption",
+      "created_at": true,
+      "updated_at": true,
+      "fields": [
+        {
+          "name": "option_text",
+          "type": "text",
+          "nullable": false,
+          "isIndex": true,
+          "isUnique": false
+        },
+        {
+          "name": "vote_question_id",
+          "type": "uuid",
+          "nullable": false,
+          "isIndex": false,
+          "isUnique": false
+        }
+      ],
+      "indexes": [],
+      "uniques": []
+    },
+    {
+      "name": "Voter",
+      "created_at": true,
+      "updated_at": true,
+      "fields": [
+        {
+          "name": "wallet_address",
+          "type": "varchar",
+          "nullable": false,
+          "isIndex": true,
+          "isUnique": true
+        }
+      ],
+      "indexes": [],
+      "uniques": []
+    },
+    {
+      "name": "Vote",
+      "created_at": true,
+      "updated_at": true,
+      "fields": [
+        {
+          "name": "vote_option_id",
+          "type": "uuid",
+          "nullable": false,
+          "isIndex": false,
+          "isUnique": false
+        },
+        {
+          "name": "voter_id",
+          "type": "uuid",
+          "nullable": false,
+          "isIndex": false,
+          "isUnique": false
+        }
+      ],
+      "indexes": [],
+      "uniques": []
+    }
+  ],
+  "relationships": [
+    {
+      "from": "VoteQuestion",
+      "to": "VoteOption",
+      "type": "OneToMany"
+    },
+    {
+      "from": "VoteOption",
+      "to": "Vote",
+      "type": "OneToMany"
+    },
+    {
+      "from": "Voter",
+      "to": "Vote",
+      "type": "OneToMany"
+    }
+  ],
+  "_removedEntities": []
+}
